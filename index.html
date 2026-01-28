@@ -1,12 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
     <title>युरेशिया रेकी सदस्यता आवेदन</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/eurasia-reiyukai-form/Style.css">
+    <link rel="stylesheet" href="style.css">
 
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -18,78 +20,73 @@
     <!-- CENTER : LOGO + TITLES -->
     <div class="header-center">
         <p class="tagline">कृतज्ञताको मन, कृतज्ञताको संसार</p>
-        <img src="/eurasia-reiyukai-form/Assets/Logo.png" alt="Eurasia Reiyukai Logo" class="logo">
+        <img src="assets/logo.png" alt="Eurasia Reiyukai Logo" class="logo">
         <h2>युरेशिया रेकी, नेपाल</h2>
         <h1>सदस्यताको लागि आवेदन-पत्र</h1>
     </div>
-</div>
+
+    <!-- RIGHT : PASSPORT PHOTO -->
     <div class="header-right">
         <label class="passport-box">
-            <input type="file" name="applicant_photo" accept="image/*" id="photoInput" hidden required>
+            <input type="file" name="applicant_photo" accept="image/*" id="photoInput" hidden>
             <span id="photoStatus">Passport<br>Photo</span>
         </label>
     </div>
+
+</div>
+
     <!-- Form Start -->
-    <form
-  id="reikiForm"
-  action="https://formspree.io/f/xojwaqrn"
-  method="POST"
-  enctype="multipart/form-data">
-        
-            <!-- RIGHT : PASSPORT PHOTO -->
-
-
-<input type="hidden" name="_subject" value="New Reiyukai Membership Application">
+    <form id="reikiForm">
 
 
         <!-- Basic Info -->
         <div class="row">
             <div class="field">
                 <label>श्री/श्रीमती/सुश्री</label>
-                <input type="text" name="title"required>
+                <input type="text" name="title">
             </div>
             <div class="field">
                 <label>मिति</label>
-                <input type="date" name="date"required>
+                <input type="date" name="date">
             </div>
         </div>
 
         <label>Name in English</label>
-        <input type="text" name="name_english"required>
+        <input type="text" name="name_english">
 
         <div class="row">
             <div class="field">
                 <label>ठेगाना</label>
-                <input type="text" name="address"required>
+                <input type="text" name="address">
             </div>
             <div class="field">
                 <label>फोन नं.</label>
-                <input type="text" name="phone"required>
+                <input type="text" name="phone">
             </div>
         </div>
 
         <div class="row">
             <div class="field">
                 <label>जन्म मिति</label>
-                <input type="date" name="dob"required>
+                <input type="date" name="dob">
             </div>
             <div class="field">
                 <label>पेशा</label>
-                <input type="text" name="occupation"required>
+                <input type="text" name="occupation">
             </div>
             <div class="field">
                 <label>रक्त समूह</label>
-                <input type="text" name="blood_group"required>
+                <input type="text" name="blood_group">
             </div>
         </div>
 
         <label>प्रवेश गराउने व्यक्ति</label>
-        <input type="text" name="introducer"required>
+        <input type="text" name="introducer">
 
         <div class="row">
             <div class="field">
                 <label>इ-मेल</label>
-                <input type="email" name="email"required>
+                <input type="email" name="email">
             </div>
         </div>
 
@@ -101,11 +98,11 @@
         </p>
 
         <!-- QR IMAGE -->
-        <img src="/eurasia-reiyukai-form/Assets/Qr.png" alt="Payment QR" class="qr-image" id="qrImage">
+        <img src="assets/qr.png" alt="Payment QR" class="qr-image" id="qrImage">
 
         <!-- Payment Screenshot Upload -->
         <label>भुक्तानी स्क्रिनसट अपलोड गर्नुहोस्</label>
-        <input type="file" name="payment_screenshot" accept="image/*"required>
+        <input type="file" name="payment_screenshot" accept="image/*">
 
         <!-- ================= FINAL DECLARATION ================= -->
 <div class="final-note">
@@ -129,19 +126,7 @@
 </div>
 
 <!-- JavaScript -->
-<script src="/eurasia-reiyukai-form/Script.js"></script>
+<script src="script.js"></script>
 
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
