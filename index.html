@@ -22,9 +22,13 @@
         <h2>युरेशिया रेकी, नेपाल</h2>
         <h1>सदस्यताको लागि आवेदन-पत्र</h1>
     </div>
-
 </div>
-
+    <div class="header-right">
+        <label class="passport-box">
+            <input type="file" name="applicant_photo" accept="image/*" id="photoInput" hidden required>
+            <span id="photoStatus">Passport<br>Photo</span>
+        </label>
+    </div>
     <!-- Form Start -->
     <form
   id="reikiForm"
@@ -33,12 +37,7 @@
   enctype="multipart/form-data">
         
             <!-- RIGHT : PASSPORT PHOTO -->
-    <div class="header-right">
-        <label class="passport-box">
-            <input type="file" name="applicant_photo" accept="image/*" id="photoInput" hidden required>
-            <span id="photoStatus">Passport<br>Photo</span>
-        </label>
-    </div>
+
 
 <input type="hidden" name="_subject" value="New Reiyukai Membership Application">
 
@@ -135,6 +134,7 @@
 </body>
 
 </html>
+
 
 
 
