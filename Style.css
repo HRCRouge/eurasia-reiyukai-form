@@ -1,0 +1,130 @@
+﻿/* ================= GLOBAL ================= */
+body {
+    font-family: "Noto Sans Devanagari", Arial, sans-serif;
+    background: #f3f5f4;
+    padding: 20px;
+}
+
+.form-container {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 25px;
+    border: 3px solid #2e7d32; /* GREEN BORDER */
+}
+
+/* ================= HEADER ================= */
+.header-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-center {
+    text-align: center;
+}
+
+.logo {
+    width: 85px;
+    margin-bottom: 6px;
+}
+
+.tagline {
+    color: #c62828; /* RED */
+    font-weight: bold;
+}
+
+.header-center h2 {
+    color: #2e7d32;
+    margin: 5px 0;
+}
+
+.header-center h1 {
+    color: #c62828;
+    margin: 5px 0;
+}
+
+/* ================= PASSPORT PHOTO ================= */
+.header-right {
+    justify-self: end;
+}
+
+.passport-box {
+    width: 120px;
+    height: 150px;
+    border: 2px solid #2e7d32;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+    background: #f6fbf6;
+    color: #555;
+}
+
+/* ================= FORM ================= */
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 7px;
+    margin-top: 5px;
+    border: 1px solid #7a9c7a;
+}
+
+.row {
+    display: flex;
+    gap: 15px;
+}
+
+.field {
+    flex: 1;
+}
+
+/* ================= SECTION TITLE ================= */
+.section-title {
+    margin-top: 25px;
+    padding: 8px;
+    background: #d9ead3;
+    border-left: 6px solid #2e7d32;
+    font-weight: bold;
+}
+
+/* ================= PAYMENT ================= */
+.qr-image {
+    width: 150px;
+    cursor: pointer;
+    border: 2px solid #2e7d32;
+    margin: 15px 0;
+}
+
+/* ================= FINAL NOTE ================= */
+.final-note {
+    margin-top: 25px;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 1.5px solid #2e7d32;
+    background: #f6fbf6;
+    padding: 15px;
+}
+
+/* ================= SUBMIT ================= */
+.submit-btn {
+    margin-top: 25px;
+    padding: 12px 30px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #1b5e20;
+}
