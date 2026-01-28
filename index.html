@@ -26,7 +26,7 @@
     <!-- RIGHT : PASSPORT PHOTO -->
     <div class="header-right">
         <label class="passport-box">
-            <input type="file" name="applicant_photo" accept="image/*" id="photoInput" hidden>
+            <input type="file" name="applicant_photo" accept="image/*" id="photoInput" hidden required>
             <span id="photoStatus">Passport<br>Photo</span>
         </label>
     </div>
@@ -34,57 +34,62 @@
 </div>
 
     <!-- Form Start -->
-    <form id="reikiForm">
+    <form
+  id="reikiForm"
+  action="https://formspree.io/f/xojwaqrn"
+  method="POST"
+  enctype="multipart/form-data"
+>
 
 
         <!-- Basic Info -->
         <div class="row">
             <div class="field">
                 <label>श्री/श्रीमती/सुश्री</label>
-                <input type="text" name="title">
+                <input type="text" name="title"required>
             </div>
             <div class="field">
                 <label>मिति</label>
-                <input type="date" name="date">
+                <input type="date" name="date"required>
             </div>
         </div>
 
         <label>Name in English</label>
-        <input type="text" name="name_english">
+        <input type="text" name="name_english"required>
 
         <div class="row">
             <div class="field">
                 <label>ठेगाना</label>
-                <input type="text" name="address">
+                <input type="text" name="address"required>
             </div>
             <div class="field">
                 <label>फोन नं.</label>
-                <input type="text" name="phone">
+                <input type="text" name="phone"required>
             </div>
         </div>
 
         <div class="row">
             <div class="field">
                 <label>जन्म मिति</label>
-                <input type="date" name="dob">
+                <input type="date" name="dob"required>
             </div>
             <div class="field">
                 <label>पेशा</label>
-                <input type="text" name="occupation">
+                <input type="text" name="occupation"required>
             </div>
             <div class="field">
                 <label>रक्त समूह</label>
-                <input type="text" name="blood_group">
+                <input type="text" name="blood_group"required>
             </div>
         </div>
 
         <label>प्रवेश गराउने व्यक्ति</label>
-        <input type="text" name="introducer">
+        <input type="text" name="introducer"required>
 
         <div class="row">
             <div class="field">
                 <label>इ-मेल</label>
-                <input type="email" name="email">
+                <input type="email" name="email"required>
             </div>
         </div>
 
@@ -100,7 +105,7 @@
 
         <!-- Payment Screenshot Upload -->
         <label>भुक्तानी स्क्रिनसट अपलोड गर्नुहोस्</label>
-        <input type="file" name="payment_screenshot" accept="image/*">
+        <input type="file" name="payment_screenshot" accept="image/*"required>
 
         <!-- ================= FINAL DECLARATION ================= -->
 <div class="final-note">
@@ -129,6 +134,7 @@
 </body>
 
 </html>
+
 
 
 
