@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
      API endpoint before deploying.
   ───────────────────────────────────────── */
   const CONFIG = {
-    BACKEND_URL: "https://script.google.com/macros/s/AKfycbzWPoKjF8HhJ184VVianYSXsNIzRVcQjkb3QPLJ0CuyjsY3XDq6yycOXQMuer1tNZiq/exec",   // ← replace with your endpoint
+    BACKEND_URL: "https://script.google.com/macros/s/AKfycbyRa8d6u8o37yCBcaPOzz9sWKp-xoDYTjAhjxEya64fVEbGicPeHQJKKdbRO95EqWAS/exec",   // ← replace with your endpoint
     DRY_RUN: false,   // set false in production to actually POST
   };
 
