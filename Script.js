@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const CONFIG = {
-    BACKEND_URL:   "https://script.google.com/macros/s/AKfycbyRa8d6u8o37yCBcaPOzz9sWKp-xoDYTjAhjxEya64fVEbGicPeHQJKKdbRO95EqWAS/exec",
+    BACKEND_URL:   "https://script.google.com/macros/s/AKfycbzWPoKjF8HhJ184VVianYSXsNIzRVcQjkb3QPLJ0CuyjsY3XDq6yycOXQMuer1tNZiq/exec",
     DRY_RUN:       false,
     IMAGE_MAX_PX:  1000,   // max width or height after resize
     IMAGE_QUALITY: 0.75,   // JPEG quality 0–1
