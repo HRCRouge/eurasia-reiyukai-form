@@ -3,10 +3,10 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const CONFIG = {
-    BACKEND_URL:   "https://script.google.com/macros/s/AKfycbzWPoKjF8HhJ184VVianYSXsNIzRVcQjkb3QPLJ0CuyjsY3XDq6yycOXQMuer1tNZiq/exec",
+    BACKEND_URL:   "https://script.google.com/macros/s/AKfycbyRa8d6u8o37yCBcaPOzz9sWKp-xoDYTjAhjxEya64fVEbGicPeHQJKKdbRO95EqWAS/exec",
     DRY_RUN:       false,
-    IMAGE_MAX_PX:  1000,   // max width or height after resize
-    IMAGE_QUALITY: 0.75,   // JPEG quality 0–1
+    IMAGE_MAX_PX:  1000,
+    IMAGE_QUALITY: 0.75,
   };
 
   /* ── PASSPORT PHOTO preview ── */
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!file) return;
       const r = new FileReader();
       r.onload = ev => {
-        photoPreview.src = ev.target.result;
+        photoPreview.src           = ev.target.result;
         photoPreview.style.display = "block";
         photoStatus.style.display  = "none";
       };
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ── PAYMENT screenshot feedback ── */
+  /* ── PAYMENT feedback ── */
   const paymentFileInput = document.getElementById("paymentScreenshot");
   const paymentStatus    = document.getElementById("paymentStatus");
   if (paymentFileInput) {
@@ -70,15 +70,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ── IMAGE COMPRESSION ──
-     Resizes image so neither side exceeds IMAGE_MAX_PX,
-     then re-encodes as JPEG at IMAGE_QUALITY.
-     A typical phone photo (~4 MB) becomes ~100–200 KB,
-     keeping the total JSON payload well under Apps Script's 6 MB POST limit.
+     Shrinks image to max 1000px on longest side and re-encodes
+     as JPEG at 75% quality. Turns a 5 MB phone photo into ~100 KB,
+     keeping the total JSON payload well under Apps Script's 6 MB limit.
   ── */
   function compressImage(file, maxPx, quality) {
     return new Promise((resolve, reject) => {
       if (!file) { resolve(null); return; }
-
       const reader = new FileReader();
       reader.onerror = () => reject(new Error("Cannot read " + file.name));
       reader.onload  = ev => {
@@ -94,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
           canvas.width = w; canvas.height = h;
           canvas.getContext("2d").drawImage(img, 0, 0, w, h);
           const dataUrl = canvas.toDataURL("image/jpeg", quality);
-          console.log(`Compressed "${file.name}": ${w}×${h}px, ~${Math.round(dataUrl.length * 0.75 / 1024)} KB`);
+          console.log(`Compressed "${file.name}": ${w}×${h}px ~${Math.round(dataUrl.length * 0.75 / 1024)} KB`);
           resolve(dataUrl);
         };
         img.src = ev.target.result;
@@ -105,8 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ── BUILD JSON PAYLOAD ── */
   async function buildPayload(form) {
-    const photoFile   = photoInput?.files[0]        || null;
-    const paymentFile = paymentFileInput?.files[0]  || null;
+    const photoFile   = photoInput?.files[0]       || null;
+    const paymentFile = paymentFileInput?.files[0] || null;
 
     const [photoB64, paymentB64] = await Promise.all([
       compressImage(photoFile,   CONFIG.IMAGE_MAX_PX, CONFIG.IMAGE_QUALITY),
@@ -115,9 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const payload = {};
 
-    // All text fields present in the form
-    ["title","date","name_english","address","phone",
-     "dob","occupation","blood_group","introducer","email","branch"
+    // Read every text field that exists in the form
+    ["title", "date", "name_english", "address", "phone",
+     "dob", "occupation", "blood_group", "introducer", "email", "branch"
     ].forEach(name => {
       const el = form.elements[name];
       if (el) payload[name] = el.value.trim();
@@ -125,15 +123,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (photoB64) {
       payload.applicant_photo_base64   = photoB64;
-      payload.applicant_photo_filename = photoFile.name.replace(/\.[^.]+$/, "") + ".jpg";
+      payload.applicant_photo_filename = photoFile.name;
     }
     if (paymentB64) {
       payload.payment_screenshot_base64   = paymentB64;
-      payload.payment_screenshot_filename = paymentFile.name.replace(/\.[^.]+$/, "") + ".jpg";
+      payload.payment_screenshot_filename = paymentFile.name;
     }
 
     payload.submitted_at = new Date().toISOString();
-    payload.form_version = "2.2";
+    payload.form_version = "2.4";
     return payload;
   }
 
@@ -153,16 +151,16 @@ document.addEventListener("DOMContentLoaded", () => {
         showToast("⏳ Compressing images…", 60000);
         payload = await buildPayload(form);
         const kb = Math.round(JSON.stringify(payload).length / 1024);
-        console.log("Total payload: ~" + kb + " KB");
+        console.log("Payload size: ~" + kb + " KB");
         if (kb > 4500) { showToast("⚠ Images too large (" + kb + " KB). Use a smaller photo."); return; }
       } catch (err) {
         showToast("⚠ Image error: " + err.message); return;
       }
 
       if (CONFIG.DRY_RUN) {
-        console.log("DRY RUN payload:", Object.fromEntries(
-          Object.entries(payload).map(([k,v]) => [k, typeof v === "string" && v.length > 80
-            ? v.slice(0,60) + "… (" + Math.round(v.length/1024) + " KB)" : v])
+        console.log("DRY RUN:", Object.fromEntries(
+          Object.entries(payload).map(([k, v]) => [k, typeof v === "string" && v.length > 80
+            ? v.slice(0, 60) + "… (" + Math.round(v.length / 1024) + " KB)" : v])
         ));
         showToast("✓ Dry-run — check console."); return;
       }
@@ -171,14 +169,13 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.textContent = "Submitting… कृपया प्रतीक्षा गर्नुहोस्";
 
       try {
-        // No Content-Type header — sending without it avoids the CORS preflight
-        // that Apps Script cannot respond to, which would silently block the request.
+        // No Content-Type header — avoids CORS preflight that Apps Script can't handle
         const res  = await fetch(CONFIG.BACKEND_URL, { method: "POST", body: JSON.stringify(payload) });
         const text = await res.text();
         let result;
-        try { result = JSON.parse(text); }
+        try   { result = JSON.parse(text); }
         catch { throw new Error("Bad server response: " + text.slice(0, 200)); }
-        if (!result.success) throw new Error(result.error || "Server error");
+        if (!result.success) throw new Error(result.error || "Server error.");
 
         showToast("✓ आवेदन सफलतापूर्वक पेश गरियो! Ref: " + result.membershipRef, 7000);
         resetForm();
@@ -198,4 +195,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (photoStatus)   { photoStatus.style.display = "block"; }
     if (paymentStatus) { paymentStatus.textContent = ""; }
   }
+
 });
